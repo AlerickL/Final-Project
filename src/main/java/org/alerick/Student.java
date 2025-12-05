@@ -25,7 +25,7 @@ public class Student {
             return false;
         } else {
             registeredCourses.add(course);
-            course.registerStudent(this);
+            course.getRegisteredStudents().add(this);
             List<Assignment> assignments = course.getAssignments();
             for (int i = 0; i < assignments.size(); i++) {
                 assignments.get(i).getScores().add(null);
