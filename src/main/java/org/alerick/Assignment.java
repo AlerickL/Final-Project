@@ -1,8 +1,11 @@
 package org.alerick;
 
+import lombok.Getter;
+
 import java.util.List;
 import java.util.Random;
 
+@Getter
 public class Assignment {
     private String assignmentId;
     private String assignmentName;
