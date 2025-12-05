@@ -3,12 +3,12 @@ package org.alerick;
 public class Department {
     private String departmentId;
     private String departmentName;
-    private static int nextid = 1;
+    private static int nextId = 1;
 
     public Department(String departmentName) {
         if (isDepartmentNameValid(departmentName)){
-            this.departmentName = departmentName;
-            this.departmentId = String.format("D%02d", nextid++);
+            this.departmentName = Util.toTitleCase(departmentName);
+            this.departmentId = String.format("D%02d", nextId++);
         } else {
             this.departmentId = null;
             this.departmentName = null;
