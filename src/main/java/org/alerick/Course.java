@@ -15,12 +15,25 @@ public class Course {
     private List<Student> registeredStudents;
     private static int nextId = 1;
 
+    /**
+     * Registers a student to the course
+     * @param student the student
+     * @return if the student was registered.
+     */
+    public boolean registerStudent(Student student) {
+        registeredStudents.add(student);
+        for (int i = 0; i < assignments.size(); i++) {
+            assignments.get(i).getScores().add(null);
+        }
+        return true;
+    }
+
     public Course(String courseName, double credits, Department department) {
         this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
         this.courseName = Util.toTitleCase(courseName);
         this.credits = credits;
         this.department = department;
-        this.assignments = new ArrayList<Assignment>();
-        this.registeredStudents = new ArrayList<Student>();
+        this.assignments = new ArrayList<>();
+        this.registeredStudents = new ArrayList<>();
     }
 }
