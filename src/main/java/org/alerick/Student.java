@@ -34,8 +34,14 @@ public class Student {
         }
     }
 
-
-
+    public Student(String studentName, Gender gender, Address address, Department department) {
+        this.studentId = String.format("S%06d", nextId++);
+        this.studentName = Util.toTitleCase(studentName);
+        this.gender = gender;
+        this.address = address;
+        this.department = department;
+        this.registeredCourses = new ArrayList<Course>();
+    }
 
     public enum Gender {
         MALE, FEMALE
