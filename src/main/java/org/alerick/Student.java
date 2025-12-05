@@ -1,8 +1,11 @@
 package org.alerick;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Student {
     private String studentId;
     private String studentName;
@@ -40,7 +43,7 @@ public class Student {
         this.gender = gender;
         this.address = address;
         this.department = department;
-        this.registeredCourses = new ArrayList<Course>();
+        this.registeredCourses = new ArrayList<>();
     }
 
     public enum Gender {
