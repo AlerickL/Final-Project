@@ -1,5 +1,8 @@
 package org.alerick;
 
+import lombok.Getter;
+
+@Getter
 public class Department {
     private String departmentId;
     private String departmentName;
