@@ -37,6 +37,21 @@ public class Student {
         }
     }
 
+    /**
+     * Removes a course from a student course load and removes the student from that course
+     * @param course the course
+     * @return if the course was dropped
+     */
+    public boolean dropCourse(Course course) {
+        if (!registeredCourses.contains(course)) {
+            return false;
+        } else {
+            registeredCourses.remove(course);
+            course.getRegisteredStudents().remove(this);
+            return true;
+        }
+    }
+
     public Student(String studentName, Gender gender, Address address, Department department) {
         this.studentId = String.format("S%06d", nextId++);
         this.studentName = Util.toTitleCase(studentName);
