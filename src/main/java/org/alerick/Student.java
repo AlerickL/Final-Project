@@ -61,6 +61,30 @@ public class Student {
         this.registeredCourses = new ArrayList<>();
     }
 
+    public String toSimplifiedString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", department=" + department +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (Course course : registeredCourses) {
+            str += course.toSimplifiedString();
+        }
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses=" + str +
+                '}';
+    }
+
     public enum Gender {
         MALE, FEMALE
     }

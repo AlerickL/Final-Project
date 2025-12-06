@@ -36,4 +36,29 @@ public class Course {
         this.assignments = new ArrayList<>();
         this.registeredStudents = new ArrayList<>();
     }
+
+    public String toSimplifiedString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (Student student : registeredStudents) {
+            str += student.toSimplifiedString();
+        }
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                ", assignments=" + assignments +
+                ", registeredStudents=" + str +
+                '}';
+    }
 }
