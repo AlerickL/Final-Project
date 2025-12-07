@@ -1,18 +1,21 @@
 package org.alerick;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode
 @Getter
 public class Student {
     private String studentId;
-    private String studentName;
-    private Gender gender;
-    private Address address;
-    private Department department;
-    private List<Course> registeredCourses;
+    @Setter private String studentName;
+    @Setter private Gender gender;
+    @Setter private Address address;
+    @Setter private Department department;
+    @Setter private List<Course> registeredCourses;
     private static int nextId = 1;
 
     /**
