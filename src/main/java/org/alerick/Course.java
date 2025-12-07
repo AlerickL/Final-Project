@@ -16,6 +16,17 @@ public class Course {
     private static int nextId = 1;
 
     /**
+     * Checks if the weights of all assignment of a course add to 100.
+     * @return if the weights add to 100.
+     */
+    private boolean isAssignmentValid() {
+        double sum = 0;
+        for (Assignment assignment : assignments) {
+            sum += assignment.getWeight();
+        }
+        return sum == 100;
+    }
+    /**
      * Registers a student to the course
      * @param student the student
      * @return if the student was registered.
