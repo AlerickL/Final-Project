@@ -39,6 +39,22 @@ public class Course {
         return true;
     }
 
+    /**
+     * Calculates the student averages for a course
+     * @return an array containing all the averages
+     */
+    public int[] calcStudentAvg() {
+        int[] studentAvgs = new int[registeredStudents.size()];
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            double avg = 0;
+            for (Assignment assignment : assignments) {
+                List<Integer> scores = assignment.getScores();
+                avg += scores.get(i) * (1 / assignment.getWeight());
+            }
+            studentAvgs[i] = (int) avg;
+        }
+    }
+
     public Course(String courseName, double credits, Department department) {
         this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
         this.courseName = Util.toTitleCase(courseName);
