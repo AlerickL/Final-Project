@@ -13,18 +13,25 @@ public class Assignment {
     private List<Integer> scores;
     private static int nextId = 1;
 
+    /**
+     * generates a random score for each student in the assignment
+     */
     private void generateRandomScores() {
+        if (scores == null) {
+            return;
+        }
+
         Random random = new Random();
         int idx = random.nextInt(0, 11);
 
-        Integer score = 0;
-        score = switch (idx) {
-            case 1, 2 -> random.nextInt(60, 70);
-            case 3, 4 -> random.nextInt(70, 80);
-            case 5, 6, 7, 8 -> random.nextInt(80, 90);
-            case 9, 10 -> random.nextInt(90, 101);
-            default -> random.nextInt(0, 60);
-        };
-
+        for (Integer integer : scores) {
+            integer = switch (idx) {
+                case 1, 2 -> random.nextInt(60, 70);
+                case 3, 4 -> random.nextInt(70, 80);
+                case 5, 6, 7, 8 -> random.nextInt(80, 90);
+                case 9, 10 -> random.nextInt(90, 101);
+                default -> random.nextInt(0, 60);
+            };
+        }
     }
 }
