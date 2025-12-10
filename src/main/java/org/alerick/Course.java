@@ -53,6 +53,20 @@ public class Course {
             }
             studentAvgs[i] = (int) avg;
         }
+        return studentAvgs;
+    }
+
+    /**
+     * Adds an assignment to the course
+     * @param assignmentName the assignment's name
+     * @param weight the assignment's weight
+     * @return true
+     */
+    public boolean addAssignment(String assignmentName, double weight) {
+        Assignment assignment = new Assignment(assignmentName, weight, registeredStudents.size());
+        assignment.generateRandomScores();
+        assignments.add(assignment);
+        return true;
     }
 
     public Course(String courseName, double credits, Department department) {
