@@ -64,9 +64,28 @@ public class Course {
      */
     public boolean addAssignment(String assignmentName, double weight) {
         Assignment assignment = new Assignment(assignmentName, weight, registeredStudents.size());
-        assignment.generateRandomScores();
         assignments.add(assignment);
         return true;
+    }
+
+    /**
+     * Generates scores and final scores for each student
+     */
+    public void generateScores() {
+        for (Assignment assignment : assignments) {
+            assignment.generateRandomScores();
+        }
+        Assignment finalGrades = new Assignment("FinalGrade", 0, registeredStudents.size());
+        for (Student student : registeredStudents) {
+            int finalScore = 0;
+            for (Assignment assignment : assignments) {
+                for (int i = 0; i < assignments.size(); i++) {
+                    finalScore += assignment.getScores().get(i);
+                }
+            }
+            finalScore /= assignments.size();
+            finalGrades.getScores().add(finalScore);
+        }
     }
 
     public Course(String courseName, double credits, Department department) {
