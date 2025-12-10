@@ -2,6 +2,7 @@ package org.alerick;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,14 +17,13 @@ public class Assignment {
     /**
      * generates a random score for each student in the assignment
      */
-    private void generateRandomScores() {
+    public void generateRandomScores() {
         if (scores == null) {
             return;
         }
 
         Random random = new Random();
         int idx = random.nextInt(0, 11);
-
         for (Integer integer : scores) {
             integer = switch (idx) {
                 case 1, 2 -> random.nextInt(60, 70);
@@ -33,5 +33,12 @@ public class Assignment {
                 default -> random.nextInt(0, 60);
             };
         }
+    }
+
+    public Assignment(String assignmentName, double weight, int existingStudents) {
+        this.assignmentId = String.format("%02d", nextId++);
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.scores = new ArrayList<>(existingStudents);
     }
 }
