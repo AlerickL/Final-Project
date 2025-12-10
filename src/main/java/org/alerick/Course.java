@@ -76,17 +76,40 @@ public class Course {
             assignment.generateRandomScores();
         }
         Assignment finalGrades = new Assignment("FinalGrade", 0, registeredStudents.size());
-        for (Student student : registeredStudents) {
+        for (int i = 0; i < registeredStudents.size(); i++) {
             int finalScore = 0;
+            double weights = 0;
             for (Assignment assignment : assignments) {
-                for (int i = 0; i < assignments.size(); i++) {
-                    finalScore += assignment.getScores().get(i);
-                }
+                finalScore += assignment.getScores().get(i) * assignment.getWeight();
+                weights += assignment.getWeight();
             }
-            finalScore /= assignments.size();
+            finalScore /= weights;
             finalGrades.getScores().add(finalScore);
         }
+        assignments.add(finalGrades);
     }
+
+    /**
+     * Displays the scores and final scores for each student and the average for each assignment
+     */
+    public void displayScores() {
+        System.out.printf("Course: %s (%s)\n", courseName, courseId);
+        System.out.printf("%-15s", "Assignment:");
+        System.out.printf("%-15s\n", Assignment.formatNames(assignments));
+
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            System.out.printf("%-15s", registeredStudents.get(i).getStudentName());
+            for (int j = 0; j < assignments.size(); j++) {
+                System.out.printf("%-15d", assignments.get(j).getScores().get(i));
+            }
+            System.out.print("\n");
+        }
+        System.out.printf("%-15s", "Avg");
+        for (Assignment assignment : assignments) {
+            System.out.printf("%-15.0f", assignment.calcAssignmentAvg());
+        }
+    }
+
 
     public Course(String courseName, double credits, Department department) {
         this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
