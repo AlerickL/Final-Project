@@ -37,7 +37,7 @@ public class Address {
      * @param postalCode the postal code
      * @return if the postal code is valid
      */
-    private static boolean isPostalCodeValid(String postalCode) { // how to test if private?
+    private static boolean isPostalCodeValid(String postalCode) {
         if (postalCode == null || postalCode.length() != 6) {
             return false;
         }
