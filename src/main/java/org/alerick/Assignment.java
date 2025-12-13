@@ -41,8 +41,8 @@ public class Assignment {
             return;
         }
         Random random = new Random();
-        int idx = random.nextInt(0, 11);
         for (int i = 0; i < scores.size(); i++) {
+            int idx = random.nextInt(0, 11);
             int score = 0;
             score = switch (idx) {
                 case 1, 2 -> random.nextInt(60, 70);
