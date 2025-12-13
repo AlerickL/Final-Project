@@ -1,19 +1,31 @@
 package org.alerick;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@EqualsAndHashCode
 public class Course {
-    private String courseId;
-    private String courseName;
-    private double credits;
-    private Department department;
-    private List<Assignment> assignments;
-    private List<Student> registeredStudents;
+    private final String courseId;
+    @Setter private String courseName;
+    @Setter private double credits;
+    @Setter private Department department;
+    @Setter private List<Assignment> assignments;
+    @Setter private List<Student> registeredStudents;
     private static int nextId = 1;
+
+    public Course(String courseName, double credits, Department department) {
+        this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
+        this.courseName = Util.toTitleCase(courseName);
+        this.credits = credits;
+        this.department = department;
+        this.assignments = new ArrayList<>();
+        this.registeredStudents = new ArrayList<>();
+    }
 
     /**
      * Checks if the weights of all assignment of a course add to 100.
@@ -40,7 +52,7 @@ public class Course {
     }
 
     /**
-     * Calculates the student averages for a course
+     * Calculates the students' weighted averages for a course
      * @return an array containing all the averages
      */
     public int[] calcStudentAvg() {
@@ -60,7 +72,7 @@ public class Course {
      * Adds an assignment to the course
      * @param assignmentName the assignment's name
      * @param weight the assignment's weight
-     * @return true
+     * @return if the assignment was added
      */
     public boolean addAssignment(String assignmentName, double weight) {
         Assignment assignment = new Assignment(assignmentName, weight, registeredStudents.size());
@@ -108,16 +120,6 @@ public class Course {
         for (Assignment assignment : assignments) {
             System.out.printf("%-15.0f", assignment.calcAssignmentAvg());
         }
-    }
-
-
-    public Course(String courseName, double credits, Department department) {
-        this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
-        this.courseName = Util.toTitleCase(courseName);
-        this.credits = credits;
-        this.department = department;
-        this.assignments = new ArrayList<>();
-        this.registeredStudents = new ArrayList<>();
     }
 
     public String toSimplifiedString() {
