@@ -10,13 +10,22 @@ import java.util.List;
 @EqualsAndHashCode
 @Getter
 public class Student {
-    private String studentId;
+    private final String studentId;
     @Setter private String studentName;
     @Setter private Gender gender;
     @Setter private Address address;
     @Setter private Department department;
     @Setter private List<Course> registeredCourses;
     private static int nextId = 1;
+
+    public Student(String studentName, Gender gender, Address address, Department department) {
+        this.studentId = String.format("S%06d", nextId++);
+        this.studentName = Util.toTitleCase(studentName);
+        this.gender = gender;
+        this.address = address;
+        this.department = department;
+        this.registeredCourses = new ArrayList<>();
+    }
 
     /**
      * Registers a new course for a student:
@@ -53,15 +62,6 @@ public class Student {
             course.getRegisteredStudents().remove(this);
             return true;
         }
-    }
-
-    public Student(String studentName, Gender gender, Address address, Department department) {
-        this.studentId = String.format("S%06d", nextId++);
-        this.studentName = Util.toTitleCase(studentName);
-        this.gender = gender;
-        this.address = address;
-        this.department = department;
-        this.registeredCourses = new ArrayList<>();
     }
 
     public String toSimplifiedString() {
