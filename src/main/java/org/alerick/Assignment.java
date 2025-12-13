@@ -8,11 +8,18 @@ import java.util.Random;
 
 @Getter
 public class Assignment {
-    private String assignmentId;
+    private final String assignmentId;
     private String assignmentName;
     private double weight;
     private List<Integer> scores;
     private static int nextId = 1;
+
+    public Assignment(String assignmentName, double weight, int existingStudents) {
+        this.assignmentId = String.format("%02d", nextId++);
+        this.assignmentName = Util.toTitleCase(assignmentName);
+        this.weight = weight;
+        this.scores = new ArrayList<>(existingStudents);
+    }
 
     /**
      * Calculates the average of an assignment
@@ -25,6 +32,7 @@ public class Assignment {
         }
         return sum / scores.size();
     }
+
     /**
      * generates a random score for each student in the assignment
      */
@@ -49,7 +57,7 @@ public class Assignment {
 
     /**
      * Formats a list of assignments to a single string containing only the names.
-     * Each element of the initial list has 15 spaces, and is left padded.
+     * Each element of the initial list has 15 spaces, and is right padded.
      * @param list the list of assignments
      * @return the formatted string
      */
@@ -69,13 +77,6 @@ public class Assignment {
             str += String.format("%s%s", strList.get(i), pad);
         }
         return str;
-    }
-
-    public Assignment(String assignmentName, double weight, int existingStudents) {
-        this.assignmentId = String.format("%02d", nextId++);
-        this.assignmentName = assignmentName;
-        this.weight = weight;
-        this.scores = new ArrayList<>(existingStudents);
     }
 
     @Override
