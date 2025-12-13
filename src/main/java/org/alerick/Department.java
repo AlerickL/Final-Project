@@ -1,11 +1,16 @@
 package org.alerick;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@ToString
+@EqualsAndHashCode
 public class Department {
-    private String departmentId;
-    private String departmentName;
+    private final String departmentId;
+    @Setter private String departmentName;
     private static int nextId = 1;
 
     public Department(String departmentName) {
@@ -28,7 +33,6 @@ public class Department {
             return false;
         }
         char[] chars = departmentName.toCharArray();
-
         for (char c : chars) {
             if (Character.isDigit(c)) {
                 return false;
@@ -36,5 +40,4 @@ public class Department {
         }
         return true;
     }
-
 }
